@@ -55,11 +55,22 @@
         owner: "{{ ansible_user_id }}"
         state: file
 
+    - name: "Write VM XML template to file for debugging {{ vm }}"
+      vars:
+        _vm_name: "cifmw-{{ vm }}"
+        _xml_content: "{{ lookup('template', cifmw_libvirt_manager_vm_template) }}"
+      ansible.builtin.copy:
+        content: "{{ _xml_content }}"
+        dest: "{{ cifmw_libvirt_manager_basedir }}/artifacts/{{ _vm_name }}-template.xml"
+        mode: '0644'
+
     - name: "Define VMs for type {{ vm }}"
       community.libvirt.virt:
         command: define
         xml: "{{ lookup('template', cifmw_libvirt_manager_vm_template) }}"
         uri: "qemu:///system"
+        # adding mutate_flags empty list so it will respect the UUID set in the xml template
+        mutate_flags: []
 
 - name: "Attach listed networks to the VMs {{ vm }}"
   vars:

@@ -103,6 +103,7 @@
         command: define
         xml: "{{ _clean_xml }}"
         uri: "qemu:///system"
+        mutate_flags: []
 
   always:
     - name: Clean up temporary domain XML file

@@ -17,8 +17,7 @@
       {{ hostvars[inventory_hostname]._cifmw_libvirt_manager_layout }}
     cifmw_sushy_emulator_hypervisor_target: "{{ inventory_hostname }}"
     cifmw_sushy_emulator_install_type: podman
-    cifmw_sushy_emulator_hypervisor_address: >-
-      {{ inventory_hostname }}.utility
+    cifmw_sushy_emulator_hypervisor_address: "192.168.111.1"
     cifmw_sushy_emulator_basedir: "{{ cifmw_reproducer_controller_basedir }}"
     cifmw_sushy_emulator_connection_name: "sushy.utility"
     cifmw_sushy_emulator_sshkey_path: "{{ cifmw_reproducer_controller_user_dir }}/.ssh/sushy_emulator-key"
